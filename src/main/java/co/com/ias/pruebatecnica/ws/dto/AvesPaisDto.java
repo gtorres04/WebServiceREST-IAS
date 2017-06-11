@@ -59,10 +59,13 @@ public class AvesPaisDto implements Serializable{
 		AvesPaisDto avesPaisDto = null;
 		if(null != dominio){
 			avesPaisDto = new AvesPaisDto();
-			avesPaisDto.setPaisDto(PaisDto.getDto(dominio.getPais()));
-			avesPaisDto.setAveDto(AveDto.getDto(dominio.getAve()));
+			PaisDto paisDto = new PaisDto();
+			paisDto.setCodigo(dominio.getIdPais());
+			AveDto aveDto = new AveDto();
+			aveDto.setCodigo(dominio.getIdAve());
+			avesPaisDto.setPaisDto(paisDto);
+			avesPaisDto.setAveDto(aveDto);
 		}
 		return avesPaisDto;
 	}
-
 }
