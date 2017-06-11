@@ -4,6 +4,12 @@
 package co.com.ias.pruebatecnica.ws.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.BeanUtils;
+
+import co.com.ias.pruebatecnica.ws.domain.Ave;
 
 /**
  * @author gtorress
@@ -62,6 +68,37 @@ public class AveDto implements Serializable{
 	 */
 	public void setNombreCientifico(String nombreCientifico) {
 		this.nombreCientifico = nombreCientifico;
+	}
+
+	/**
+	 * Se obtiene una lista de Dto a partir de una lista de dominio.
+	 * @param aves
+	 * @return
+	 */
+	public static List<AveDto> getDto(List<Ave> aves) {
+		List<AveDto> aveDtos = null;
+		if(null != aves){
+			aveDtos = new ArrayList<>();
+			for (Ave ave : aves) {
+				aveDtos.add(getDto(ave));
+			}
+			aveDtos = aveDtos.isEmpty() ? null : aveDtos;
+		}
+		return aveDtos;
+	}
+	
+	/**
+	 * Se obtiene un Dto a partir de dominio.
+	 * @param ave
+	 * @return
+	 */
+	public static AveDto getDto(Ave ave) {
+		AveDto aveDto = null;
+		if(null != ave){
+			aveDto = new AveDto();
+			BeanUtils.copyProperties(ave, aveDto);
+		}
+		return aveDto;
 	}
 
 }

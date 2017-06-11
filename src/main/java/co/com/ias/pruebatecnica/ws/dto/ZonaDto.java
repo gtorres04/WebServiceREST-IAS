@@ -64,5 +64,19 @@ public class ZonaDto implements Serializable{
 			BeanUtils.copyProperties(zona, zonaDto);
 		}
 		return zonaDto;
-	}	
+	}
+	
+	/**
+	 * Retorna un dominio a partir de un dto.
+	 * @param zonaDto
+	 * @return
+	 */
+	public static Zona getDomain(ZonaDto zonaDto){
+		Zona zona = null;
+		if(null != zonaDto){
+			zona = new Zona();
+			BeanUtils.copyProperties(zonaDto, zona);
+		}
+		return zona;
+	}
 }
