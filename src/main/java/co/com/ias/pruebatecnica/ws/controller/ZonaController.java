@@ -35,7 +35,7 @@ public class ZonaController {
 	@ResponseBody
 	@RequestMapping(value=ConstantesMappingURL.LISTAR_URL_MAPPING, method = RequestMethod.GET)
 	public ResponseEntity<ListaDto<ZonaDto>> listar(){
-		ResponseEntity<ListaDto<ZonaDto>> responseEntity = null;
+		ResponseEntity<ListaDto<ZonaDto>> responseEntity;
 		List<ZonaDto> zonaDtos = iZonaService.findAll(ZonaDto.class);
 		ListaDto<ZonaDto> listaDto = new ListaDto<>();
 		listaDto.setList(zonaDtos);
