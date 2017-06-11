@@ -5,6 +5,8 @@ package co.com.ias.pruebatecnica.ws.dto;
 
 import java.io.Serializable;
 
+import co.com.ias.pruebatecnica.ws.domain.AvesPais;
+
 /**
  * @author gtorress
  *
@@ -46,6 +48,21 @@ public class AvesPaisDto implements Serializable{
 	 */
 	public void setAveDto(AveDto aveDto) {
 		this.aveDto = aveDto;
+	}
+
+	/**
+	 * Retorna un Dto a partir de un dominio.
+	 * @param dominio
+	 * @return
+	 */
+	public static AvesPaisDto getDto(AvesPais dominio) {
+		AvesPaisDto avesPaisDto = null;
+		if(null != dominio){
+			avesPaisDto = new AvesPaisDto();
+			avesPaisDto.setPaisDto(PaisDto.getDto(dominio.getPais()));
+			avesPaisDto.setAveDto(AveDto.getDto(dominio.getAve()));
+		}
+		return avesPaisDto;
 	}
 
 }
