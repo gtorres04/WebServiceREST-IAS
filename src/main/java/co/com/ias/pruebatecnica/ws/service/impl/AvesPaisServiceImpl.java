@@ -14,7 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 import co.com.ias.pruebatecnica.ws.dao.IAvesPaisDao;
 import co.com.ias.pruebatecnica.ws.dao.exception.DaoGenericException;
 import co.com.ias.pruebatecnica.ws.domain.AvesPais;
+import co.com.ias.pruebatecnica.ws.dto.AveDto;
 import co.com.ias.pruebatecnica.ws.dto.AvesPaisDto;
+import co.com.ias.pruebatecnica.ws.service.IAveService;
 import co.com.ias.pruebatecnica.ws.service.IAvesPaisService;
 import co.com.ias.pruebatecnica.ws.service.exception.CuposServiceException;
 import co.com.ias.pruebatecnica.ws.support.AdmonLogger;
@@ -34,6 +36,9 @@ public class AvesPaisServiceImpl extends ServiceImpl<AvesPais, AvesPaisDto> impl
 
 	@SuppressWarnings("unused")
 	private IAvesPaisDao iAvesPaisDao;
+	
+	@Autowired
+	private IAveService iAveService;
 
 	/**
 	 * Dependencia Dao de Pais
@@ -69,5 +74,17 @@ public class AvesPaisServiceImpl extends ServiceImpl<AvesPais, AvesPaisDto> impl
 			throw new CuposServiceException(e);
 		}
 		return dtos;
+	}
+	
+	/* (non-Javadoc)
+	 * @see co.com.ias.pruebatecnica.ws.service.impl.ServiceImpl#create(java.util.List)
+	 */
+	@Override
+	public void create(List<AvesPaisDto> avesPaisDtos){
+		AveDto aveDto = avesPaisDtos.get(0).getAveDto();
+		iAveService.create(aveDto);
+		for (AvesPaisDto avesPaisDto : avesPaisDtos) {
+			this.create(avesPaisDto);
+		}
 	}
 }
