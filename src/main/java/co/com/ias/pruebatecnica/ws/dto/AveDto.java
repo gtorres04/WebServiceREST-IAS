@@ -5,6 +5,12 @@ package co.com.ias.pruebatecnica.ws.dto;
 
 import java.io.Serializable;
 
+import org.springframework.beans.BeanUtils;
+
+import com.mchange.v2.beans.BeansUtils;
+
+import co.com.ias.pruebatecnica.ws.domain.Ave;
+
 /**
  * @author gtorress
  *
@@ -62,6 +68,20 @@ public class AveDto implements Serializable{
 	 */
 	public void setNombreCientifico(String nombreCientifico) {
 		this.nombreCientifico = nombreCientifico;
+	}
+
+	/**
+	 * Retorna un Dto a partir de un dominio.
+	 * @param ave
+	 * @return
+	 */
+	public static AveDto getDto(Ave ave) {
+		AveDto aveDto = null;
+		if(null != ave){
+			aveDto = new AveDto();
+			BeanUtils.copyProperties(ave, aveDto);
+		}
+		return aveDto;
 	}
 
 }
