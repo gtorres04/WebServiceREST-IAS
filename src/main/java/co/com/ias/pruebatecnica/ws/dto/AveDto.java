@@ -15,18 +15,20 @@ import co.com.ias.pruebatecnica.ws.domain.Ave;
  * @author gtorress
  *
  */
-public class AveDto implements Serializable{
-	
+public class AveDto implements Serializable {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -9208103715876625093L;
 
 	private String codigo;
-	
+
 	private String nombreComun;
-	
+
 	private String nombreCientifico;
+
+	private List<PaisDto> paises;
 
 	/**
 	 * @return the codigo
@@ -36,7 +38,8 @@ public class AveDto implements Serializable{
 	}
 
 	/**
-	 * @param codigo the codigo to set
+	 * @param codigo
+	 *            the codigo to set
 	 */
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
@@ -50,7 +53,8 @@ public class AveDto implements Serializable{
 	}
 
 	/**
-	 * @param nombreComun the nombreComun to set
+	 * @param nombreComun
+	 *            the nombreComun to set
 	 */
 	public void setNombreComun(String nombreComun) {
 		this.nombreComun = nombreComun;
@@ -64,20 +68,37 @@ public class AveDto implements Serializable{
 	}
 
 	/**
-	 * @param nombreCientifico the nombreCientifico to set
+	 * @param nombreCientifico
+	 *            the nombreCientifico to set
 	 */
 	public void setNombreCientifico(String nombreCientifico) {
 		this.nombreCientifico = nombreCientifico;
 	}
 
 	/**
+	 * @return the paises
+	 */
+	public List<PaisDto> getPaises() {
+		return paises;
+	}
+
+	/**
+	 * @param paises
+	 *            the paises to set
+	 */
+	public void setPaises(List<PaisDto> paises) {
+		this.paises = paises;
+	}
+
+	/**
 	 * Se obtiene una lista de Dto a partir de una lista de dominio.
+	 * 
 	 * @param aves
 	 * @return
 	 */
 	public static List<AveDto> getDto(List<Ave> aves) {
 		List<AveDto> aveDtos = null;
-		if(null != aves){
+		if (null != aves) {
 			aveDtos = new ArrayList<>();
 			for (Ave ave : aves) {
 				aveDtos.add(getDto(ave));
@@ -86,19 +107,34 @@ public class AveDto implements Serializable{
 		}
 		return aveDtos;
 	}
-	
+
 	/**
 	 * Se obtiene un Dto a partir de dominio.
+	 * 
 	 * @param ave
 	 * @return
 	 */
 	public static AveDto getDto(Ave ave) {
 		AveDto aveDto = null;
-		if(null != ave){
+		if (null != ave) {
 			aveDto = new AveDto();
 			BeanUtils.copyProperties(ave, aveDto);
 		}
 		return aveDto;
+	}
+
+	/**
+	 * Se obtiene un dominio a partir de un Dto.
+	 * @param object
+	 * @return
+	 */
+	public static Ave getDomain(AveDto object) {
+		Ave ave = null;
+		if (null != object) {
+			ave = new Ave();
+			BeanUtils.copyProperties(object, ave);
+		}
+		return ave;
 	}
 
 }

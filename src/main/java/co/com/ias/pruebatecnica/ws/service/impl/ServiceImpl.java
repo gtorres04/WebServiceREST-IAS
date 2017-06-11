@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import co.com.ias.pruebatecnica.ws.dao.IDaoGeneric;
 import co.com.ias.pruebatecnica.ws.dao.exception.DaoGenericException;
 import co.com.ias.pruebatecnica.ws.service.IService;
-import co.com.ias.pruebatecnica.ws.service.exception.CuposServiceException;
+import co.com.ias.pruebatecnica.ws.service.exception.PruebaTecnicaServiceException;
 import co.com.ias.pruebatecnica.ws.support.AdmonLogger;
 
 /**
@@ -65,10 +65,10 @@ public abstract class ServiceImpl<D, T> implements IService<T> {
 			BeanUtils.copyProperties(dominio, object);
 		} catch (DaoGenericException e) {
 			LOGGER.debug(e);
-			throw new CuposServiceException(e);
+			throw new PruebaTecnicaServiceException(e);
 		} catch (Exception e) {
 			LOGGER.error(e);
-			throw new CuposServiceException(e);
+			throw new PruebaTecnicaServiceException(e);
 		}
 	}
 
@@ -90,10 +90,10 @@ public abstract class ServiceImpl<D, T> implements IService<T> {
 			BeanUtils.copyProperties(dominio, entidad);
 		} catch (DaoGenericException e) {
 			LOGGER.debug(e);
-			throw new CuposServiceException(e);
+			throw new PruebaTecnicaServiceException(e);
 		} catch (Exception e) {
 			LOGGER.error(e);
-			throw new CuposServiceException(e);
+			throw new PruebaTecnicaServiceException(e);
 		}
 		return entidad;
 	}
@@ -119,10 +119,10 @@ public abstract class ServiceImpl<D, T> implements IService<T> {
 			}
 		} catch (DaoGenericException e) {
 			LOGGER.debug(e);
-			throw new CuposServiceException(e);
+			throw new PruebaTecnicaServiceException(e);
 		} catch (Exception e) {
 			LOGGER.error(e);
-			throw new CuposServiceException(e);
+			throw new PruebaTecnicaServiceException(e);
 		}
 		return dtos;
 	}
@@ -143,10 +143,10 @@ public abstract class ServiceImpl<D, T> implements IService<T> {
 			iDaoGeneric.update(dominio);
 		} catch (DaoGenericException e) {
 			LOGGER.debug(e);
-			throw new CuposServiceException(e);
+			throw new PruebaTecnicaServiceException(e);
 		} catch (Exception e) {
 			LOGGER.error(e);
-			throw new CuposServiceException(e);
+			throw new PruebaTecnicaServiceException(e);
 		}
 
 	}
@@ -166,10 +166,10 @@ public abstract class ServiceImpl<D, T> implements IService<T> {
 			iDaoGeneric.delete(dominio);
 		} catch (DaoGenericException e) {
 			LOGGER.debug(e);
-			throw new CuposServiceException(e);
+			throw new PruebaTecnicaServiceException(e);
 		} catch (Exception e) {
 			LOGGER.error(e);
-			throw new CuposServiceException(e);
+			throw new PruebaTecnicaServiceException(e);
 		}
 	}
 
@@ -187,7 +187,7 @@ public abstract class ServiceImpl<D, T> implements IService<T> {
 			return dominio;
 		} catch (InstantiationException | IllegalAccessException e) {
 			LOGGER.debug(e);
-			throw new CuposServiceException(e);
+			throw new PruebaTecnicaServiceException(e);
 		}
 	}
 

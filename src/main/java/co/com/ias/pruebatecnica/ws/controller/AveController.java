@@ -2,6 +2,7 @@ package co.com.ias.pruebatecnica.ws.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -17,14 +18,19 @@ import co.com.ias.pruebatecnica.ws.response.dto.Dto;
 import co.com.ias.pruebatecnica.ws.response.dto.ListaDto;
 import co.com.ias.pruebatecnica.ws.response.dto.ResponseDto;
 import co.com.ias.pruebatecnica.ws.service.IAveService;
+import co.com.ias.pruebatecnica.ws.service.exception.PruebaTecnicaServiceException;
+import co.com.ias.pruebatecnica.ws.support.AdmonLogger;
 import co.com.ias.pruebatecnica.ws.support.ConstantesMappingURL;
 import co.com.ias.pruebatecnica.ws.support.Enumeraciones.CodigosResponseDto;
 import co.com.ias.pruebatecnica.ws.support.Enumeraciones.EjecucionResponseDto;
+import co.com.ias.pruebatecnica.ws.support.Enumeraciones.MSN_EXCEPTION_SERVICE;
 
 
 @Controller
 @RequestMapping("/api/ave")
 public class AveController {
+	
+	private static final AdmonLogger LOGGER = AdmonLogger.getInstance(Logger.getLogger(AveController.class));
 	
 	@Autowired
 	@Qualifier("AveServiceImpl")
@@ -41,10 +47,25 @@ public class AveController {
 	public ResponseEntity<Dto<AveDto>> registrar(@RequestBody AveDto aveDto){
 		ResponseEntity<Dto<AveDto>> responseEntity;
 		Dto<AveDto> dto = new Dto<>();
-		iAveService.create(aveDto);
-		dto.setObject(aveDto);
-		dto.setCodigo(CodigosResponseDto.SUCCES.getValue());
-		dto.setEjecucion(EjecucionResponseDto.SUCCES.getValue());
+		try{
+			iAveService.create(aveDto);
+			dto.setObject(aveDto);
+			dto.setCodigo(CodigosResponseDto.SUCCES.getValue());
+			dto.setEjecucion(EjecucionResponseDto.SUCCES.getValue());
+			dto.setDescripcion(MSN_EXCEPTION_SERVICE.MSN_REGISTRO_EXITOSO.getMensaje());
+		}catch (PruebaTecnicaServiceException e) {
+			LOGGER.debug(e);
+			dto.setObject(aveDto);
+			dto.setCodigo(CodigosResponseDto.FAIL.getValue());
+			dto.setEjecucion(EjecucionResponseDto.FAIL.getValue());
+			dto.setDescripcion(e.getMessage());
+		}catch (Exception e) {
+			LOGGER.error(e);
+			dto.setObject(aveDto);
+			dto.setCodigo(CodigosResponseDto.FAIL.getValue());
+			dto.setEjecucion(EjecucionResponseDto.FAIL.getValue());
+			dto.setDescripcion(MSN_EXCEPTION_SERVICE.MSN_ERROR_NO_GESTIONADO.getMensaje());
+		}
 		responseEntity = new ResponseEntity<>(dto, HttpStatus.OK);
 		return responseEntity;
 	}
@@ -60,10 +81,25 @@ public class AveController {
 	public ResponseEntity<Dto<AveDto>> editar(@RequestBody AveDto aveDto){
 		ResponseEntity<Dto<AveDto>> responseEntity;
 		Dto<AveDto> dto = new Dto<>();
-		iAveService.update(aveDto);
-		dto.setObject(aveDto);
-		dto.setCodigo(CodigosResponseDto.SUCCES.getValue());
-		dto.setEjecucion(EjecucionResponseDto.SUCCES.getValue());
+		try{
+			iAveService.update(aveDto);
+			dto.setObject(aveDto);
+			dto.setCodigo(CodigosResponseDto.SUCCES.getValue());
+			dto.setEjecucion(EjecucionResponseDto.SUCCES.getValue());
+			dto.setDescripcion(MSN_EXCEPTION_SERVICE.MSN_EDICION_EXITOSO.getMensaje());
+		}catch (PruebaTecnicaServiceException e) {
+			LOGGER.debug(e);
+			dto.setObject(aveDto);
+			dto.setCodigo(CodigosResponseDto.FAIL.getValue());
+			dto.setEjecucion(EjecucionResponseDto.FAIL.getValue());
+			dto.setDescripcion(e.getMessage());
+		}catch (Exception e) {
+			LOGGER.error(e);
+			dto.setObject(aveDto);
+			dto.setCodigo(CodigosResponseDto.FAIL.getValue());
+			dto.setEjecucion(EjecucionResponseDto.FAIL.getValue());
+			dto.setDescripcion(MSN_EXCEPTION_SERVICE.MSN_ERROR_NO_GESTIONADO.getMensaje());
+		}
 		responseEntity = new ResponseEntity<>(dto, HttpStatus.OK);
 		return responseEntity;
 	}
@@ -79,9 +115,23 @@ public class AveController {
 	public ResponseEntity<ResponseDto> eliminar(@RequestBody AveDto aveDto){
 		ResponseEntity<ResponseDto> responseEntity;
 		ResponseDto responseDto = new ResponseDto();
-		iAveService.delete(aveDto);
-		responseDto.setCodigo(CodigosResponseDto.SUCCES.getValue());
-		responseDto.setEjecucion(EjecucionResponseDto.SUCCES.getValue());
+		try{
+			iAveService.delete(aveDto);
+			responseDto.setCodigo(CodigosResponseDto.SUCCES.getValue());
+			responseDto.setEjecucion(EjecucionResponseDto.SUCCES.getValue());
+			responseDto.setDescripcion(MSN_EXCEPTION_SERVICE.MSN_ELIMINACION_EXITOSO.getMensaje());
+		}catch (PruebaTecnicaServiceException e) {
+			LOGGER.debug(e);
+			responseDto.setCodigo(CodigosResponseDto.FAIL.getValue());
+			responseDto.setEjecucion(EjecucionResponseDto.FAIL.getValue());
+			responseDto.setDescripcion(e.getMessage());
+		}catch (Exception e) {
+			LOGGER.error(e);
+			responseDto.setCodigo(CodigosResponseDto.FAIL.getValue());
+			responseDto.setEjecucion(EjecucionResponseDto.FAIL.getValue());
+			responseDto.setDescripcion(MSN_EXCEPTION_SERVICE.MSN_ERROR_NO_GESTIONADO.getMensaje());
+		}
+		
 		responseEntity = new ResponseEntity<>(responseDto, HttpStatus.OK);
 		return responseEntity;
 	}

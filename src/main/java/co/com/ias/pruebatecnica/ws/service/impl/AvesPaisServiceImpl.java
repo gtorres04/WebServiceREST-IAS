@@ -18,7 +18,7 @@ import co.com.ias.pruebatecnica.ws.dto.AveDto;
 import co.com.ias.pruebatecnica.ws.dto.AvesPaisDto;
 import co.com.ias.pruebatecnica.ws.service.IAveService;
 import co.com.ias.pruebatecnica.ws.service.IAvesPaisService;
-import co.com.ias.pruebatecnica.ws.service.exception.CuposServiceException;
+import co.com.ias.pruebatecnica.ws.service.exception.PruebaTecnicaServiceException;
 import co.com.ias.pruebatecnica.ws.support.AdmonLogger;
 
 /**
@@ -72,10 +72,10 @@ public class AvesPaisServiceImpl extends ServiceImpl<AvesPais, AvesPaisDto> impl
 			}
 		} catch (DaoGenericException e) {
 			LOGGER.debug(e);
-			throw new CuposServiceException(e);
+			throw new PruebaTecnicaServiceException(e);
 		} catch (Exception e) {
 			LOGGER.error(e);
-			throw new CuposServiceException(e);
+			throw new PruebaTecnicaServiceException(e);
 		}
 		return dtos;
 	}

@@ -5,6 +5,8 @@ package co.com.ias.pruebatecnica.ws.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+
 /**
  * @author gtorress
  *
@@ -16,36 +18,40 @@ public class IdAvesPais implements Serializable{
 	 */
 	private static final long serialVersionUID = -7254663360716583367L;
 
-	private Pais pais;
+	@Column(name = "CDPAIS")
+	private String idPais;
 
-	private Ave ave;
+	@Column(name = "CDAVE")
+	private String idAve;
 
 	/**
-	 * @return the pais
+	 * @return the idPais
 	 */
-	public Pais getPais() {
-		return pais;
+	public String getIdPais() {
+		return idPais;
 	}
 
 	/**
-	 * @param pais the pais to set
+	 * @param idPais the idPais to set
 	 */
-	public void setPais(Pais pais) {
-		this.pais = pais;
+	public void setIdPais(String idPais) {
+		this.idPais = idPais;
 	}
 
 	/**
-	 * @return the ave
+	 * @return the idAve
 	 */
-	public Ave getAve() {
-		return ave;
+	public String getIdAve() {
+		return idAve;
 	}
 
 	/**
-	 * @param ave the ave to set
+	 * @param idAve the idAve to set
 	 */
-	public void setAve(Ave ave) {
-		this.ave = ave;
+	public void setIdAve(String idAve) {
+		this.idAve = idAve;
 	}
+
+	
 	
 }

@@ -3,7 +3,7 @@ package co.com.ias.pruebatecnica.ws.service.exception;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CuposServiceException extends RuntimeException {
+public class PruebaTecnicaServiceException extends RuntimeException {
 	/**
 	 * 
 	 */
@@ -14,7 +14,7 @@ public class CuposServiceException extends RuntimeException {
 	/**
 	 * @param message
 	 */
-	public CuposServiceException(String message) {
+	public PruebaTecnicaServiceException(String message) {
 		super(message);
 		mensajes = new ArrayList<>();
 		mensajes.add(message);
@@ -23,7 +23,7 @@ public class CuposServiceException extends RuntimeException {
 	/**
 	 * @param message
 	 */
-	public CuposServiceException(List<String> message) {
+	public PruebaTecnicaServiceException(List<String> message) {
 		mensajes = message;
 	}
 
@@ -31,7 +31,7 @@ public class CuposServiceException extends RuntimeException {
 	/**
 	 * @param cause
 	 */
-	public CuposServiceException(Throwable cause) {
+	public PruebaTecnicaServiceException(Throwable cause) {
 		super(cause);
 		mensajes=null;
 	}
@@ -40,7 +40,7 @@ public class CuposServiceException extends RuntimeException {
 	 * @param message
 	 * @param cause
 	 */
-	public CuposServiceException(String message, Throwable cause) {
+	public PruebaTecnicaServiceException(String message, Throwable cause) {
 		super(message, cause);
 		mensajes = new ArrayList<>();
 		mensajes.add(message);

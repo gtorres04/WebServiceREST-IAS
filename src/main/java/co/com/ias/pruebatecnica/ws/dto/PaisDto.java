@@ -86,4 +86,21 @@ public class PaisDto implements Serializable {
 		return paisDto;
 	}
 
+	/**
+	 * Retorna un Dominio a partir de un Dto.
+	 * @param paisDto
+	 * @return
+	 */
+	public static Pais getDomain(PaisDto paisDto) {
+		Pais pais = null;
+		if(null != paisDto){
+			pais=new Pais();
+			BeanUtils.copyProperties(paisDto, pais);
+			if(null != paisDto.getZonaDto()){
+				pais.setZona(ZonaDto.getDomain(paisDto.getZonaDto()));
+			}
+		}
+		return pais;
+	}
+
 }

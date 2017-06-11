@@ -36,7 +36,10 @@ public class Enumeraciones {
 	 *
 	 */
 	public enum MSN_EXCEPTION_SERVICE {
-		MSN_ERROR_NO_GESTIONADO("Estamos presentando problemas tecnicos");
+		MSN_ERROR_NO_GESTIONADO("Estamos presentando problemas tecnicos"),
+		MSN_REGISTRO_EXITOSO("El registro se realizo de manera exitosa"),
+		MSN_EDICION_EXITOSO("La modificacion se realizo de manera exitosa"),
+		MSN_ELIMINACION_EXITOSO("La eliminacion se realizo de manera exitosa");
 
 		private String mensaje;
 

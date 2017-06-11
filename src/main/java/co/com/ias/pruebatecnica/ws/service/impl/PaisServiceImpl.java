@@ -16,7 +16,7 @@ import co.com.ias.pruebatecnica.ws.dao.exception.DaoGenericException;
 import co.com.ias.pruebatecnica.ws.domain.Pais;
 import co.com.ias.pruebatecnica.ws.dto.PaisDto;
 import co.com.ias.pruebatecnica.ws.service.IPaisService;
-import co.com.ias.pruebatecnica.ws.service.exception.CuposServiceException;
+import co.com.ias.pruebatecnica.ws.service.exception.PruebaTecnicaServiceException;
 import co.com.ias.pruebatecnica.ws.support.AdmonLogger;
 
 /**
@@ -63,10 +63,10 @@ public class PaisServiceImpl extends ServiceImpl<Pais, PaisDto> implements IPais
 			}
 		} catch (DaoGenericException e) {
 			LOGGER.debug(e);
-			throw new CuposServiceException(e);
+			throw new PruebaTecnicaServiceException(e);
 		} catch (Exception e) {
 			LOGGER.error(e);
-			throw new CuposServiceException(e);
+			throw new PruebaTecnicaServiceException(e);
 		}
 		return dtos;
 	}
