@@ -69,7 +69,39 @@ public class AveController {
 		responseEntity = new ResponseEntity<>(dto, HttpStatus.OK);
 		return responseEntity;
 	}
-	
+	/**
+	 * Se consulta por id el ave.
+	 * @param ave
+	 * @return
+	 */
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	@RequestMapping(value=ConstantesMappingURL.CONSULTAR_URL_MAPPING, method = RequestMethod.POST)
+	public ResponseEntity<Dto<AveDto>> consultarPorId(@RequestBody AveDto aveDtoRequest){
+		ResponseEntity<Dto<AveDto>> responseEntity;
+		Dto<AveDto> dto = new Dto<>();
+		AveDto aveDto = null;
+		try{
+			aveDto = iAveService.findById(aveDtoRequest);
+			dto.setObject(aveDto);
+			dto.setCodigo(CodigosResponseDto.SUCCES.getValue());
+			dto.setEjecucion(EjecucionResponseDto.SUCCES.getValue());
+		}catch (PruebaTecnicaServiceException e) {
+			LOGGER.debug(e);
+			dto.setObject(aveDto);
+			dto.setCodigo(CodigosResponseDto.FAIL.getValue());
+			dto.setEjecucion(EjecucionResponseDto.FAIL.getValue());
+			dto.setDescripcion(e.getMessage());
+		}catch (Exception e) {
+			LOGGER.error(e);
+			dto.setObject(aveDto);
+			dto.setCodigo(CodigosResponseDto.FAIL.getValue());
+			dto.setEjecucion(EjecucionResponseDto.FAIL.getValue());
+			dto.setDescripcion(MSN_EXCEPTION_SERVICE.MSN_ERROR_NO_GESTIONADO.getMensaje());
+		}
+		responseEntity = new ResponseEntity<>(dto, HttpStatus.OK);
+		return responseEntity;
+	}
 	/**
 	 * se modifica el ave en la base de datos.
 	 * @param ave

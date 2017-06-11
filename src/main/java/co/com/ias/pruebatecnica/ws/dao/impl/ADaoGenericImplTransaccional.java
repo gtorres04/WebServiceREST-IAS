@@ -100,8 +100,8 @@ public abstract class ADaoGenericImplTransaccional<T> implements IDaoGeneric<T> 
 		Method metodoGetId;
 		T objectAux = null;
 		try {
-			metodoGetId = claseGenerica.getMethod("getId");
-			objectAux = (T) sessionFactory.getCurrentSession().get(claseGenerica, (long) metodoGetId.invoke(object));
+			metodoGetId = claseGenerica.getMethod("getCodigo");
+			objectAux = (T) sessionFactory.getCurrentSession().get(claseGenerica, (String) metodoGetId.invoke(object));
 		} catch (HibernateException | InvocationTargetException | SecurityException | NoSuchMethodException
 				| IllegalAccessException | IllegalArgumentException e) {
 			LOGGER.error(e);
