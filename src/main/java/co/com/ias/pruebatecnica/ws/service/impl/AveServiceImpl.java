@@ -123,12 +123,8 @@ public class AveServiceImpl extends ServiceImpl<Ave, AveDto> implements IAveServ
 	 */
 	@Override
 	public void update(AveDto object) {
-		Ave ave = this.iDaoGeneric.findById(AveDto.getDomain(object));
-		List<AvesPais> avesPais = this.iAvesPaisDao.findByAve(ave);
-		if (null != avesPais) {
-			iAvesPaisDao.delete(avesPais);
-			this.iDaoGeneric.delete(ave);
-		}
+		Ave ave = AveDto.getDomain(object);
+		delete(object);
 		this.iDaoGeneric.create(ave);
 		if (null != object.getPaises()) {
 			for (PaisDto paisDto : object.getPaises()) {
@@ -137,6 +133,19 @@ public class AveServiceImpl extends ServiceImpl<Ave, AveDto> implements IAveServ
 				avesPaisAux.setIdPais(paisDto.getCodigo());
 				iAvesPaisDao.create(avesPaisAux);
 			}
+		}
+	}
+	
+	/* (non-Javadoc)
+	 * @see co.com.ias.pruebatecnica.ws.service.impl.ServiceImpl#delete(java.lang.Object)
+	 */
+	@Override
+	public void delete(AveDto object) {
+		Ave ave = this.iDaoGeneric.findById(AveDto.getDomain(object));
+		List<AvesPais> avesPais = this.iAvesPaisDao.findByAve(ave);
+		if (null != avesPais) {
+			iAvesPaisDao.delete(avesPais);
+			this.iDaoGeneric.delete(ave);
 		}
 	}
 }
