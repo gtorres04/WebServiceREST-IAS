@@ -99,7 +99,9 @@ public class AveServiceImpl extends ServiceImpl<Ave, AveDto> implements IAveServ
 	public AveDto findById(AveDto object) {
 		AveDto aveDto;
 		Ave ave = this.iDaoGeneric.findById(AveDto.getDomain(object));
-		List<AvesPais> avesPais = this.iAvesPaisDao.findByAve(ave);
+		List<AvesPais> avesPais = null;
+		if(null != ave)
+			avesPais = this.iAvesPaisDao.findByAve(ave);
 		aveDto = AveDto.getDto(ave);
 		if (null != avesPais) {
 			aveDto.setPaises(new ArrayList<PaisDto>());

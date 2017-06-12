@@ -48,6 +48,8 @@ public class AveController {
 		ResponseEntity<Dto<AveDto>> responseEntity;
 		Dto<AveDto> dto = new Dto<>();
 		try{
+			if(null != iAveService.findById(aveDto))
+				throw new PruebaTecnicaServiceException(MSN_EXCEPTION_SERVICE.MSN_REGISTRO_CODIGO_EXISTENTE.getMensaje());
 			iAveService.create(aveDto);
 			dto.setObject(aveDto);
 			dto.setCodigo(CodigosResponseDto.SUCCES.getValue());
@@ -175,11 +177,29 @@ public class AveController {
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	@RequestMapping(value=ConstantesMappingURL.LISTAR_URL_MAPPING, method = RequestMethod.GET)
-	public ResponseEntity<ListaDto<AveDto>> listar(){
+	public ResponseEntity<ListaDto<AveDto>> listar(@RequestBody AveDto aveDto){
 		ResponseEntity<ListaDto<AveDto>> responseEntity;
 		List<AveDto> aveDtos = iAveService.findAll(AveDto.class);
 		ListaDto<AveDto> listaDto = new ListaDto<>();
 		listaDto.setList(aveDtos);
+		listaDto.setCodigo(CodigosResponseDto.SUCCES.getValue());
+		listaDto.setEjecucion(EjecucionResponseDto.SUCCES.getValue());
+		responseEntity = new ResponseEntity<>(listaDto, HttpStatus.OK);
+		return responseEntity;
+	}
+	
+	/**
+	 * Se listan todos los aves de acuerdo al nombre y zona.
+	 * @return
+	 */
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	@RequestMapping(value=ConstantesMappingURL.LISTAR_AVE_FILTRO_URL_MAPPING, method = RequestMethod.GET)
+	public ResponseEntity<ListaDto<AveDto>> listarPorFiltroNombreZona(){
+		ResponseEntity<ListaDto<AveDto>> responseEntity;
+		//List<AveDto> aveDtos = iAveService.consultarAvesPorNombresYZona(patronNombre, zonaDto)(AveDto.class);
+		ListaDto<AveDto> listaDto = new ListaDto<>();
+		//listaDto.setList(aveDtos);
 		listaDto.setCodigo(CodigosResponseDto.SUCCES.getValue());
 		listaDto.setEjecucion(EjecucionResponseDto.SUCCES.getValue());
 		responseEntity = new ResponseEntity<>(listaDto, HttpStatus.OK);

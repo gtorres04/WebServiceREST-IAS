@@ -7,6 +7,8 @@ public class ConstantesMappingURL {
 	public static final String CONSULTAR_URL_MAPPING = "/findbyid";
 	public static final String EDITAR_URL_MAPPING = "/edit";
 	public static final String ELIMINAR_URL_MAPPING = "/delete";
+	
+	public static final String LISTAR_AVE_FILTRO_URL_MAPPING = "/listByNomeAndZone";
 
 	private ConstantesMappingURL(){}
 }

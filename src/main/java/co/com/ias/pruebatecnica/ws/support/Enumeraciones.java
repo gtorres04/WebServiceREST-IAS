@@ -39,7 +39,8 @@ public class Enumeraciones {
 		MSN_ERROR_NO_GESTIONADO("Estamos presentando problemas tecnicos"),
 		MSN_REGISTRO_EXITOSO("El registro se realizo de manera exitosa"),
 		MSN_EDICION_EXITOSO("La modificacion se realizo de manera exitosa"),
-		MSN_ELIMINACION_EXITOSO("La eliminacion se realizo de manera exitosa");
+		MSN_ELIMINACION_EXITOSO("La eliminacion se realizo de manera exitosa"),
+		MSN_REGISTRO_CODIGO_EXISTENTE("Registro con codigo existente");
 
 		private String mensaje;
 
