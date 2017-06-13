@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import co.com.ias.pruebatecnica.ws.dto.AveDto;
+import co.com.ias.pruebatecnica.ws.dto.FiltroAveDto;
 import co.com.ias.pruebatecnica.ws.response.dto.Dto;
 import co.com.ias.pruebatecnica.ws.response.dto.ListaDto;
 import co.com.ias.pruebatecnica.ws.response.dto.ResponseDto;
@@ -177,7 +178,7 @@ public class AveController {
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	@RequestMapping(value=ConstantesMappingURL.LISTAR_URL_MAPPING, method = RequestMethod.GET)
-	public ResponseEntity<ListaDto<AveDto>> listar(@RequestBody AveDto aveDto){
+	public ResponseEntity<ListaDto<AveDto>> listar(){
 		ResponseEntity<ListaDto<AveDto>> responseEntity;
 		List<AveDto> aveDtos = iAveService.findAll(AveDto.class);
 		ListaDto<AveDto> listaDto = new ListaDto<>();
@@ -194,12 +195,12 @@ public class AveController {
 	 */
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	@RequestMapping(value=ConstantesMappingURL.LISTAR_AVE_FILTRO_URL_MAPPING, method = RequestMethod.GET)
-	public ResponseEntity<ListaDto<AveDto>> listarPorFiltroNombreZona(){
+	@RequestMapping(value=ConstantesMappingURL.LISTAR_AVE_FILTRO_URL_MAPPING, method = RequestMethod.POST)
+	public ResponseEntity<ListaDto<AveDto>> listarPorFiltroNombreZona(@RequestBody FiltroAveDto filtroAveDto){
 		ResponseEntity<ListaDto<AveDto>> responseEntity;
-		//List<AveDto> aveDtos = iAveService.consultarAvesPorNombresYZona(patronNombre, zonaDto)(AveDto.class);
+		List<AveDto> aveDtos = iAveService.consultarAvesPorNombresYZona(filtroAveDto.getNombre(), filtroAveDto.getZonaDto());
 		ListaDto<AveDto> listaDto = new ListaDto<>();
-		//listaDto.setList(aveDtos);
+		listaDto.setList(aveDtos);
 		listaDto.setCodigo(CodigosResponseDto.SUCCES.getValue());
 		listaDto.setEjecucion(EjecucionResponseDto.SUCCES.getValue());
 		responseEntity = new ResponseEntity<>(listaDto, HttpStatus.OK);

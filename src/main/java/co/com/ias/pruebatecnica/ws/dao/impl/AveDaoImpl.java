@@ -34,14 +34,14 @@ public class AveDaoImpl extends ADaoGenericImpl<Ave> implements IAveDao {
 	@Transactional(propagation = Propagation.MANDATORY)
 	public List<Ave> consultarAvesPorNombresYZona(String patronNombre, Zona zona) {
 		List<Ave> aves;
-		StringBuilder hql = new StringBuilder("SELECT ave FROM Ave ave, AvesPais ap WHERE ave = ap.ave");
+		StringBuilder hql = new StringBuilder("SELECT distinct ave FROM Ave ave, AvesPais ap, Pais pais WHERE ave.codigo = ap.idAve AND pais.codigo = ap.idPais");
 		if (null != patronNombre)
-			hql.append(" AND (ave.nombreComun = :patronNombre OR ave.nombreCientifico = :patronNombre)");
+			hql.append(" AND (ave.nombreComun LIKE :patronNombre OR ave.nombreCientifico LIKE :patronNombre)");
 		if (null != zona)
-			hql.append(" AND ap.pais.zona= :zona)");
+			hql.append(" AND pais.zona= :zona)");
 		Query query = super.getSessionFactory().getCurrentSession().createQuery(hql.toString());
 		if (null != patronNombre)
-			query.setParameter("patronNombre", patronNombre);
+			query.setParameter("patronNombre", "%"+patronNombre+"%");
 		if (null != zona)
 			query.setParameter("zona", zona);
 		aves = query.list().isEmpty() ? null : query.list();
