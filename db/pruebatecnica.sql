@@ -32,18 +32,6 @@ CREATE TABLE IF NOT EXISTS `tont_aves` (
   `DSNOMBRE_CIENTIFICO` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `tont_aves`
---
-
-INSERT INTO `tont_aves` (`CDAVE`, `DSNOMBRE_COMUN`, `DSNOMBRE_CIENTIFICO`) VALUES
-('002', 'asdfasdf', 'asdfasdf'),
-('004', 'asdfasdfasdf', 'asdfasdfasdf'),
-('123', 'asdfasdf', 'asdfasdf'),
-('222', 'sfgasdfasdf', 'asdfasdfasdf'),
-('234', 'asdfasdf', 'asdfasdf'),
-('AV1', 'NombreComun', 'NombreCientifico');
-
 -- --------------------------------------------------------
 
 --
@@ -55,20 +43,31 @@ CREATE TABLE IF NOT EXISTS `tont_aves_pais` (
   `CDAVE` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `tont_aves_pais`
---
-
-INSERT INTO `tont_aves_pais` (`CDPAIS`, `CDAVE`) VALUES
-('ARE', '002'),
-('ARE', '123'),
-('ARE', '234'),
-('BAN', '222'),
-('BOL', '123'),
-('COL', '123'),
-('COS', '004');
 
 -- --------------------------------------------------------
+--
+-- Table structure for table `tont_zonas`
+--
+
+CREATE TABLE IF NOT EXISTS `tont_zonas` (
+  `CDZONA` varchar(3) NOT NULL,
+  `DSNOMBRE` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tont_zonas`
+--
+
+INSERT INTO `tont_zonas` (`CDZONA`, `DSNOMBRE`) VALUES
+('ADN', 'América del Norte, Norteamérica'),
+('ADS', 'América del Sur, Sudamérica, Suramérica'),
+('AFR', 'África'),
+('ANT', 'Antártida'),
+('ASI', 'Asia'),
+('EUR', 'Europa'),
+('MES', 'Mesoamérica'),
+('NUM', 'Nuevo Mundo'),
+('ORI', 'Oriente');
 
 --
 -- Table structure for table `tont_paises`
@@ -113,29 +112,7 @@ INSERT INTO `tont_paises` (`CDPAIS`, `DSNOMBRE`, `CDZONA`) VALUES
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `tont_zonas`
---
 
-CREATE TABLE IF NOT EXISTS `tont_zonas` (
-  `CDZONA` varchar(3) NOT NULL,
-  `DSNOMBRE` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `tont_zonas`
---
-
-INSERT INTO `tont_zonas` (`CDZONA`, `DSNOMBRE`) VALUES
-('ADN', 'América del Norte, Norteamérica'),
-('ADS', 'América del Sur, Sudamérica, Suramérica'),
-('AFR', 'África'),
-('ANT', 'Antártida'),
-('ASI', 'Asia'),
-('EUR', 'Europa'),
-('MES', 'Mesoamérica'),
-('NUM', 'Nuevo Mundo'),
-('ORI', 'Oriente');
 
 --
 -- Indexes for dumped tables
